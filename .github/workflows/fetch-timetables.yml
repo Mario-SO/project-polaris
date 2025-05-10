@@ -25,6 +25,12 @@ jobs:
       - name: Run script to fetch timetables
         run: bun run ./scripts/get-timetables.ts
 
+      - name: List contents of data directory
+        run: |
+          echo "Listing contents of ./data/ directory:"
+          ls -R ./data
+          echo "Finished listing ./data/ directory."
+
       - name: Commit and push updated data
         run: |
           git config user.name "github-actions[bot]"
