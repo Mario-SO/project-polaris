@@ -4,7 +4,8 @@
     "dev": "bun run --hot src/index.ts"
   },
   "dependencies": {
-    "hono": "^4.7.9"
+    "hono": "^4.7.9",
+    "posthog-node": "^4.17.1"
   },
   "devDependencies": {
     "@types/bun": "latest"
