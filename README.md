@@ -215,7 +215,7 @@ Here's a roadmap of planned enhancements and features:
 
 ### API Enhancements ⚙️
 
-*   [x] **Date & Day Filtering**: ~~Implement proper filtering based on `calendar.txt` and `calendar_dates.txt` to show schedules for specific dates/days of the week (e.g., `GET /{dep}/{arr}?date=YYYY-MM-DD`).~~ (Implemented: Defaults to today, specific date via query param)
+*   [x] **Date & Day Filtering**: Defaults to today, specific date via query param.
 *   [ ] **Improved Station Matching**: 
     *   Handle ambiguous station names more gracefully (e.g., return multiple candidates for user selection instead of just the first match).
 *   [ ] **Transfer Support**: Add logic to find journeys that require one or more transfers.
