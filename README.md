@@ -14,6 +14,9 @@ Currently, the official data is provided in GTFS format, which, while comprehens
     *   `GET /stations/{stationId}`: Retrieves details for a specific station by its ID.
     *   `GET /{departureStation}/{arrivalStation}`: Retrieves direct trip schedules. Defaults to today's date. Supports specific date querying with `?date={YYYY-MM-DD}`. Results are grouped to show unique departure/arrival time slots for the effective date.
     *   `GET /{departureStation}/{arrivalStation}/next`: Retrieves the very next available train for the route based on the current time in Spain.
+    *   `GET /stations/{stationId}/departures?date=YYYY-MM-DD&time=HH:MM`: Get all departures from a specific station. Defaults to current date/time if omitted.
+    *   `GET /routes`: List all available routes (e.g., C1, C2, C3).
+    *   `GET /routes/{routeId}`: Get details for a specific route, including its stops.
 *   🧪 **Unit & Integration Tests**: Comprehensive test suite for API endpoints and logic.
 
 ## 🛠️ Technology Stack
@@ -157,25 +160,36 @@ Here's a breakdown of the available API endpoints:
 *   **Example**: `curl "http://localhost:3000/stations/10000"`
 *   **Response**: A station object with `stop_id`, `stop_name`, `stop_lat`, `stop_lon`, or a 404 error if not found.
 
-### `GET /{departureStation}/{arrivalStation}`
-*   **Description**: Provides a timetable of direct trips between a departure and arrival station. Station names in the path are matched case-insensitively and partially (the first good match is used).
+### `GET /stations/{stationId}/departures`
+*   **Description**: Retrieves all departure times from a specific station. Supports optional `date` (`YYYY-MM-DD`) and `time` (`HH:MM`) query parameters (defaults to current date and time in Spain).
 *   **Path Parameters**:
-    *   `departureStation`: Name (or partial name) of the departure station.
-    *   `arrivalStation`: Name (or partial name) of the arrival station.
+    *   `stationId`: The unique identifier or name (partial match) of the station.
 *   **Query Parameters**:
-    *   `date` (optional): The specific date for the timetable in `YYYY-MM-DD` format. If not provided, defaults to the **current server date**.
-*   **Examples**:
-    *   `curl "http://localhost:3000/Valdemoro/Sol"` (timetable for today)
-    *   `curl "http://localhost:3000/Chamartin/Atocha?date=2024-09-01"` (timetable for September 1st, 2024)
-*   **Response**: A JSON object containing `departure_station_found`, `arrival_station_found`, `date_queried`, and a `timetable` array. Each item in the timetable includes `route_short_name`, `departure_station_departure_time`, `arrival_station_arrival_time`, etc. Returns a 404 if stations are not found or no services operate on the queried date. Results are grouped to show unique journey slots for the effective date.
+    *   `date` (optional): Date in `YYYY-MM-DD` format.
+    *   `time` (optional): Time in `HH:MM` format.
+*   **Example**:
+    ```bash
+    curl "http://localhost:3000/stations/10000/departures?date=2024-07-01&time=08:00"
+    ```
+*   **Response**: A JSON object containing `station_found`, `station_id`, `date_queried`, `time_queried`, and an array of `departures`.
 
-### `GET /{departureStation}/{arrivalStation}/next`
-*   **Description**: Returns the very next scheduled train for the specified route based on the **current time in Spain (Europe/Madrid timezone)**.
+### `GET /routes`
+*   **Description**: Lists all available routes.
+*   **Example**:
+    ```bash
+    curl "http://localhost:3000/routes"
+    ```
+*   **Response**: An array of route objects with `route_id`, `route_short_name`, and `route_long_name`.
+
+### `GET /routes/{routeId}`
+*   **Description**: Retrieves details for a specific route, including the ordered list of stops.
 *   **Path Parameters**:
-    *   `departureStation`: Name (or partial name) of the departure station.
-    *   `arrivalStation`: Name (or partial name) of the arrival station.
-*   **Example**: `curl "http://localhost:3000/Valdemoro/Sol/next"`
-*   **Response**: A JSON object containing details of the `next_train` (if one is found for the remainder of the day in Spain), along with `departure_station_found`, `arrival_station_found`, `date_queried` (current date in Spain), and `time_queried` (current time in Spain when the request was processed). Returns a 404 if no further trains are found for the day.
+    *   `routeId`: The identifier of the route (e.g., `C1`).
+*   **Example**:
+    ```bash
+    curl "http://localhost:3000/routes/C1"
+    ```
+*   **Response**: A JSON object containing `route_id`, `route_short_name`, `route_long_name`, and an array of `stops` each with `stop_id`, `stop_name`, and `stop_sequence`.
 
 ## 💡 Important Notes on API Usage
 
@@ -205,20 +219,15 @@ Here's a roadmap of planned enhancements and features:
 *   [ ] **Improved Station Matching**: 
     *   Handle ambiguous station names more gracefully (e.g., return multiple candidates for user selection instead of just the first match).
 *   [ ] **Transfer Support**: Add logic to find journeys that require one or more transfers.
-*   [ ] **Pagination**: Implement pagination for API responses (e.g., `?page=1&limit=20`).
-*   [ ] **Advanced Querying**: Allow querying by arrival time, duration, etc.
 *   [ ] **Input Validation**: Add more robust input validation for API parameters (some basic validation for date format exists).
 
 ### New API Endpoints 🗺️
 
-*   [x] `GET /stations`: ~~List all available stations (perhaps with autocomplete support `?q=partial_name`).~~ (Implemented with `?q=` for search)
-*   [x] `GET /stations/{station_id}`: ~~Get details for a specific station.~~ (Implemented)
-*   [ ] `GET /stations/{station_name_or_id}/departures?date=YYYY-MM-DD&time=HH:MM`: Get all departures from a specific station.
-*   [ ] `GET /routes`: List all available routes (e.g., C1, C2, C3).
-*   [ ] `GET /routes/{route_id}`: Get details for a specific route, including its stops.
-*   [ ] `GET /routes/{route_id}/schedule?date=YYYY-MM-DD`: Get the full schedule for a specific route on a given date.
-*   [ ] `GET /trip/{trip_id}`: Get detailed information for a specific trip, including all its stop times.
-*   [ ] `GET /{departureStation}/{arrivalStation}/next`: (This was implemented but not in the original TODO - adding as a reference)
+*   [x] `GET /stations`: List all available stations (perhaps with autocomplete support `?q=partial_name`).
+*   [x] `GET /stations/{station_id}`: Get details for a specific station.
+*   [x] `GET /stations/{station_name_or_id}/departures?date=YYYY-MM-DD&time=HH:MM`: Get all departures from a specific station.
+*   [x] `GET /routes`: List all available routes (e.g., C1, C2, C3).
+*   [x] `GET /routes/{route_id}`: Get details for a specific route, including its stops.
 
 ### Deployment & Operations 🚢
 
@@ -234,4 +243,4 @@ Here's a roadmap of planned enhancements and features:
 
 ## 🙌 Contributing
 
-Contributions are welcome! If you have ideas or want to help, feel free to open an issue or submit a pull request. (Details TBD)
+Contributions are welcome! If you have ideas or want to help, feel free to open an issue or submit a pull request.

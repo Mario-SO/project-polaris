@@ -24,6 +24,30 @@ export interface StopCandidate {
     stop_name: string;
 }
 
+export interface Departure {
+    route_short_name: string;
+    route_long_name: string;
+    trip_id: string;
+    trip_headsign: string;
+    departure_time: string;
+}
+
+export interface Route {
+    route_id: string;
+    route_short_name: string;
+    route_long_name: string;
+}
+
+export interface StopDetail {
+    stop_id: string;
+    stop_name: string;
+    stop_sequence: number;
+}
+
+export interface RouteDetail extends Route {
+    stops: StopDetail[];
+}
+
 export const findStations = (queryParam?: string): Station[] => {
     let db;
     try {
@@ -154,6 +178,70 @@ export const findNextTrip = (departureStopId: string, arrivalStopId: string, ser
         `;
         const timetableStmt = db.prepare(nextTrainQuery);
         return timetableStmt.get(...queryParams) as Trip | null;
+    } finally {
+        if (db) db.close();
+    }
+};
+
+export const findDepartures = (departureStopId: string, serviceIds: string[], currentTimeHHMMSS: string): Departure[] => {
+    if (serviceIds.length === 0) return [];
+    let db;
+    try {
+        db = new Database(DB_PATH, { readonly: true });
+        const placeholders = serviceIds.map(() => '?').join(',');
+        const sql = `
+            SELECT
+                r.route_short_name,
+                r.route_long_name,
+                t.trip_id,
+                t.trip_headsign,
+                st_dep.departure_time AS departure_time
+            FROM trips t
+            JOIN stop_times st_dep ON t.trip_id = st_dep.trip_id
+            JOIN routes r ON t.route_id = r.route_id
+            WHERE st_dep.stop_id = ?
+              AND t.service_id IN (${placeholders})
+              AND st_dep.departure_time >= ?
+            ORDER BY st_dep.departure_time
+        `;
+        const stmt = db.prepare(sql);
+        return stmt.all(departureStopId, ...serviceIds, currentTimeHHMMSS) as Departure[];
+    } finally {
+        if (db) db.close();
+    }
+};
+
+export const findRoutes = (): Route[] => {
+    let db;
+    try {
+        db = new Database(DB_PATH, { readonly: true });
+        const stmt = db.prepare("SELECT route_id, route_short_name, route_long_name FROM routes ORDER BY route_short_name");
+        return stmt.all() as Route[];
+    } finally {
+        if (db) db.close();
+    }
+};
+
+export const findRouteById = (routeId: string): RouteDetail | null => {
+    let db;
+    try {
+        db = new Database(DB_PATH, { readonly: true });
+        const routeStmt = db.prepare("SELECT route_id, route_short_name, route_long_name FROM routes WHERE route_id = ?");
+        const route = routeStmt.get(routeId) as RouteDetail | null;
+        if (!route) return null;
+        const stopsStmt = db.prepare(`
+            SELECT DISTINCT
+                st.stop_id,
+                s.stop_name,
+                st.stop_sequence
+            FROM stop_times st
+            JOIN trips t ON st.trip_id = t.trip_id
+            JOIN stops s ON st.stop_id = s.stop_id
+            WHERE t.route_id = ?
+            ORDER BY st.stop_sequence
+        `);
+        const stops = stopsStmt.all(routeId) as StopDetail[];
+        return { ...route, stops };
     } finally {
         if (db) db.close();
     }

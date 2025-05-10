@@ -204,4 +204,79 @@ describe('Renfe Timetables API Tests', () => {
     }
   });
 
+  // Tests for /stations/:stationId/departures
+  it('should return departures for /stations/:stationId/departures (defaulting to today)', async () => {
+    const stationsRes = await app.fetch(new Request('http://localhost/stations'));
+    const stations = await stationsRes.json() as any[];
+    if (stations.length === 0) {
+      console.warn('Skipping departures test as no stations found to pick an ID from.');
+      return;
+    }
+    const stationId = stations[0].stop_id;
+    const res = await app.fetch(new Request(`http://localhost/stations/${stationId}/departures`));
+    expect([200, 404]).toContain(res.status);
+    const data = await res.json() as any;
+    if (res.status === 200) {
+      expect(data).toHaveProperty('station_found');
+      expect(data).toHaveProperty('station_id', stationId);
+      expect(data).toHaveProperty('date_queried');
+      expect(data).toHaveProperty('time_queried');
+      expect(Array.isArray(data.departures)).toBe(true);
+    } else {
+      expect(data).toHaveProperty('message');
+    }
+  });
+
+  it('should return departures for /stations/:stationId/departures with provided date and time', async () => {
+    const stationsRes = await app.fetch(new Request('http://localhost/stations'));
+    const stations = await stationsRes.json() as any[];
+    if (stations.length === 0) {
+      console.warn('Skipping departures test as no stations found to pick an ID from.');
+      return;
+    }
+    const stationId = stations[0].stop_id;
+    const date = '1900-01-01';
+    const time = '00:00';
+    const res = await app.fetch(new Request(`http://localhost/stations/${stationId}/departures?date=${date}&time=${time}`));
+    expect(res.status).toBe(404);
+    const data = await res.json() as any;
+    expect(data).toHaveProperty('message');
+  });
+
+  // Tests for /routes
+  it('should return a list of routes for /routes', async () => {
+    const req = new Request('http://localhost/routes');
+    const res = await app.fetch(req);
+    expect(res.status).toBe(200);
+    const data = await res.json() as any;
+    expect(Array.isArray(data)).toBe(true);
+    if (data.length > 0) {
+      expect(data[0]).toHaveProperty('route_id');
+      expect(data[0]).toHaveProperty('route_short_name');
+      expect(data[0]).toHaveProperty('route_long_name');
+    }
+  });
+
+  it('should return route details for /routes/:routeId', async () => {
+    const routesRes = await app.fetch(new Request('http://localhost/routes'));
+    const routes = await routesRes.json() as any[];
+    if (routes.length === 0) {
+      console.warn('Skipping /routes/:routeId test as no routes found to pick an ID from.');
+      return;
+    }
+    const routeId = routes[0].route_id;
+    const req = new Request(`http://localhost/routes/${routeId}`);
+    const res = await app.fetch(req);
+    expect([200, 404]).toContain(res.status);
+    const data = await res.json() as any;
+    if (res.status === 200) {
+      expect(data).toHaveProperty('route_id', routeId);
+      expect(data).toHaveProperty('route_short_name');
+      expect(data).toHaveProperty('route_long_name');
+      expect(Array.isArray(data.stops)).toBe(true);
+    } else {
+      expect(data).toHaveProperty('error');
+    }
+  });
+
 }) 

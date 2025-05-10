@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { client as posthogClient } from './config/posthog'
 import stationRoutes from './routes/stationRoutes'
 import timetableRoutes from './routes/timetableRoutes'
+import routeRoutes from './routes/routeRoutes'
 
 console.log(`API server starting...`)
 
@@ -22,6 +23,7 @@ app.get('/', (c) => {
 // Mount the routers
 app.route('/', stationRoutes)
 app.route('/', timetableRoutes)
+app.route('/', routeRoutes)
 
 export default {
     port: 3000,
