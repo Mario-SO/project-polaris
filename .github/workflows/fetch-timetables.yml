@@ -9,47 +9,64 @@ jobs:
   fetch_data:
     runs-on: ubuntu-latest
     permissions:
-      contents: write 
+      contents: write # Required to push changes back to the repository
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          lfs: true # Ensure LFS files are checked out correctly
 
       - name: Set up Bun
         uses: oven-sh/setup-bun@v1
         with:
-          bun-version: latest 
+          bun-version: latest
 
-      - name: Install dependencies
-        run: bun install node-fetch adm-zip
-
-      - name: Install Git LFS
+      - name: Install Git LFS # Ensure git-lfs client is available
         run: |
           sudo apt-get update
           sudo apt-get install -y git-lfs
 
-      - name: Run script to fetch timetables
+      - name: Run script to fetch timetables GTFS files
         run: bun run ./scripts/get-timetables.ts
 
-      - name: List contents of data directory
+      - name: Install API dependencies
+        working-directory: ./api # Important to run in the api directory
+        run: bun install
+
+      - name: Run script to load GTFS data into SQLite
+        # This script uses paths relative to its location in api/src, 
+        # so it should be run from the repo root or have its paths adjusted if run from ./api
+        # Current load-data.ts uses import.meta.dir, so running from root with its path is fine.
+        run: bun run ./api/src/load-data.ts 
+
+      - name: List contents of data directory (for debugging)
         run: |
           echo "Listing contents of ./data/ directory:"
-          ls -R ./data
+          ls -Alh ./data
           echo "Finished listing ./data/ directory."
 
       - name: Commit and push updated data
         run: |
-          git lfs install --skip-smudge # Initialize LFS for the runner
+          git lfs install --skip-smudge # Ensure LFS is initialized for this git instance
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          mkdir -p data
-          # Track the large file(s) with LFS. This creates/updates .gitattributes
+          
+          # Track specific large files with LFS. stop_times.txt is known.
+          # The .sqlite file could also become large.
           git lfs track "data/stop_times.txt"
+          git lfs track "data/gtfs.sqlite" # Add SQLite DB to LFS
+
           # Add .gitattributes to ensure LFS configuration is committed
           git add .gitattributes
-          git add data
-          if git diff --staged --quiet data && git diff --staged --quiet .gitattributes; then
-            echo "Timetables data is up to date."
+          # Add all files in data directory (includes .txt and .sqlite)
+          git add data/
+          
+          echo "Staged files:"
+          git status --short
+
+          if git diff --staged --quiet; then # Check if there are any staged changes at all
+            echo "Timetables data and database are up to date."
           else
-            git commit -m "Update timetables data (using LFS for large files)"
+            git commit -m "Update timetables data and SQLite database (LFS)"
             git push
           fi
