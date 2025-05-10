@@ -223,8 +223,8 @@ Here's a roadmap of planned enhancements and features:
 ### Deployment & Operations 🚢
 
 *   [ ] **Automated API Deployment**: Set up CI/CD to deploy the Hono API (e.g., to Cloudflare Workers, Fly.io, Vercel, or a similar platform).
-*   [ ] **Health Check Endpoint**: Add a `/health` endpoint for monitoring.
-*   [ ] **Logging & Monitoring**: Implement more structured logging and monitoring for the API.
+*   [x] **Health Check Endpoint**: Add a `/health` endpoint for monitoring.
+*   [x] **Logging & Monitoring**: Implement more structured logging and monitoring for the API.
 
 ### Documentation & Development Experience 📚
 
