@@ -67,12 +67,10 @@ async function main() {
         await downloadFile(FILE_URL, TEMP_ZIP_PATH);
         await unzipFile(TEMP_ZIP_PATH, OUTPUT_DIR);
 
-        // Temporarily disable deleting the zip file for debugging
-        // console.log(`Deleting temporary file ${TEMP_ZIP_PATH}...`);
-        // await fs.promises.unlink(TEMP_ZIP_PATH);
-        // console.log('Temporary file deleted.');
-        console.log(`Skipping deletion of temporary file ${TEMP_ZIP_PATH} for debugging.`);
-
+        // Re-enable deleting the zip file
+        console.log(`Deleting temporary file ${TEMP_ZIP_PATH}...`);
+        await fs.promises.unlink(TEMP_ZIP_PATH);
+        console.log('Temporary file deleted.');
 
         console.log('Process completed successfully.');
 

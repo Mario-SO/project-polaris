@@ -22,6 +22,11 @@ jobs:
       - name: Install dependencies
         run: bun install node-fetch adm-zip
 
+      - name: Install Git LFS
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git-lfs
+
       - name: Run script to fetch timetables
         run: bun run ./scripts/get-timetables.ts
 
@@ -33,13 +38,18 @@ jobs:
 
       - name: Commit and push updated data
         run: |
+          git lfs install --skip-smudge # Initialize LFS for the runner
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           mkdir -p data
+          # Track the large file(s) with LFS. This creates/updates .gitattributes
+          git lfs track "data/stop_times.txt"
+          # Add .gitattributes to ensure LFS configuration is committed
+          git add .gitattributes
           git add data
-          if git diff --staged --quiet data; then
+          if git diff --staged --quiet data && git diff --staged --quiet .gitattributes; then
             echo "Timetables data is up to date."
           else
-            git commit -m "Update timetables data"
+            git commit -m "Update timetables data (using LFS for large files)"
             git push
           fi
