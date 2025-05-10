@@ -16,7 +16,7 @@ app.get('/', (c) => {
       message: 'Hello from Renfe Timetables API!'
     }
   })
-  return c.text('Hello from Renfe Timetables API! Health check event sent.')
+  return c.text('Hello from Renfe Timetables API!')
 })
 
 // Mount the routers

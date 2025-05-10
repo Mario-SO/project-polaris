@@ -33,15 +33,25 @@ project-polaris/
 ├── .github/workflows/        # GitHub Actions workflows (e.g., fetch-timetables.yml)
 ├── api/
 │   ├── src/
+│   │   ├── config/           # Configuration files
+│   │   ├── controllers/      # Request handlers
+│   │   ├── routes/           # API route definitions
+│   │   ├── services/         # Business logic
+│   │   ├── utils/            # Utility functions
 │   │   ├── index.ts          # Hono API application entry point
+│   │   ├── index.test.ts     # Tests for the API
 │   │   └── load-data.ts      # Script to load GTFS data into SQLite
 │   ├── package.json          # API dependencies (Hono, etc.)
-│   └── tsconfig.json         # TypeScript configuration for the API
+│   ├── tsconfig.json         # TypeScript configuration for the API
+│   ├── bun.lockb             # Bun lockfile
+│   └── .gitignore            # Git ignore for api directory
 ├── data/                     # Stores raw GTFS .txt files and the gtfs.sqlite database
 ├── scripts/
 │   └── get-timetables.ts     # Script to download and unzip GTFS data
+├── .gitattributes            # Git LFS attributes
+├── .gitignore                # Git ignore for project root
 ├── README.md                 # This file!
-└── ...                       # Other project files ( .gitattributes, etc.)
+└── ...                       # Other project files (e.g. .git/)
 ```
 
 ## 🚀 Getting Started & Running Locally
