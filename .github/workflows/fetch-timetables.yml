@@ -1,0 +1,43 @@
+name: Fetch and Update Timetables
+
+on:
+  workflow_dispatch: # Allows manual triggering
+  schedule:
+    - cron: '0 3 * * *' # Runs daily at 3 AM UTC
+
+jobs:
+  fetch_data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required to push changes back to the repository
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm' # Cache npm dependencies
+
+      - name: Install dependencies
+        run: npm install node-fetch adm-zip ts-node typescript
+
+      - name: Run script to fetch timetables
+        run: npx ts-node ./scripts/get-timetables.ts
+
+      - name: Commit and push updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Create data directory if it doesn't exist from a previous run,
+          # although the script should handle this. This is more for git add.
+          mkdir -p data 
+          git add data
+          # Check if there are staged changes in the data directory
+          if git diff --staged --quiet data; then
+            echo "Timetables data is up to date."
+          else
+            git commit -m "Update timetables data"
+            git push
+          fi
