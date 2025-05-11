@@ -1,0 +1,9 @@
+# flyctl launch added from .gitignore
+# deps
+**/node_modules
+**/.env
+
+# flyctl launch added from api/.gitignore
+# deps
+api/**/node_modules
+fly.toml

@@ -1,0 +1,36 @@
+# fly.toml app configuration file generated for project-polaris-proud-voice-5352 on 2025-05-11T10:06:24+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'project-polaris-proud-voice-5352'
+primary_region = 'ams'
+
+[build]
+  dockerfile = "Dockerfile"
+
+[[mounts]]
+  source = 'gtfs_data'
+  destination = '/app/data'
+
+[[services]]
+  protocol = 'tcp'
+  internal_port = 3000
+
+  [[services.ports]]
+    port = 80
+    handlers = ['http']
+
+  [[services.ports]]
+    port = 443
+    handlers = ['tls', 'http']
+
+  [services.concurrency]
+    type = 'connections'
+    hard_limit = 25
+    soft_limit = 20
+
+[[vm]]
+  memory = '2gb'
+  cpu_kind = 'shared'
+  cpus = 2
