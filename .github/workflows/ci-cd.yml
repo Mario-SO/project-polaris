@@ -24,7 +24,7 @@ jobs:
         run: bun test ./api/src/index.test.ts
 
   deploy:
-    needs: test
+    needs: tests
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
