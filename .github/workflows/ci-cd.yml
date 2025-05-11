@@ -16,6 +16,10 @@ jobs:
       - name: Install dependencies
         working-directory: api
         run: bun install
+      - name: Fetch GTFS data
+        run: bun run ./scripts/get-timetables.ts
+      - name: Load GTFS data
+        run: bun run ./api/src/load-data.ts
       - name: Run tests
         run: bun test ./api/src/index.test.ts
 
