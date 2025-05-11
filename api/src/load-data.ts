@@ -24,6 +24,12 @@ if (!fs.existsSync(DATA_DIR)) {
     process.exit(1);
 }
 
+// Remove any existing database file (e.g., LFS pointer) to start fresh
+if (fs.existsSync(DB_PATH)) {
+    console.log(`Removing existing database file at ${DB_PATH}`);
+    fs.unlinkSync(DB_PATH);
+}
+
 const db = new Database(DB_PATH);
 console.log(`Opened database at ${DB_PATH}`);
 
