@@ -440,3 +440,5 @@ route_id,route_short_name,route_long_name,route_type,route_color,route_text_colo
 70T0010C1  ,C1  ,                                        -                                        ,2,D90724,FFFFFF                                    
 70T0011C1  ,C1  ,                                        -                                        ,2,D90724,FFFFFF                                    
 70T0012C1  ,C1  ,                                        -                                        ,2,D90724,FFFFFF                                    
+70T0013C1  ,C1  ,                                        -                                        ,2,D90724,FFFFFF                                    
+70T0014C1  ,C1  ,                                        -                                        ,2,D90724,FFFFFF                                    

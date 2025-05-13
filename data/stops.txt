@@ -815,28 +815,16 @@ stop_id,stop_name,stop_lat,stop_lon,wheelchair_boarding
 66211,Aldaia,39.4610444,-0.4632388,2                                                                                                                  
 66212,Valencia Sant Isidre,39.4526833,-0.4058694,2                                                                                                    
 66214,Xirivella-Alqueries,39.4625527,-0.4321861,2                                                                                                     
-67004,María De Huerva,41.5397590,-0.9980820,2                                                                                                         
 67007,Arañales De Muel,41.4689460,-1.0863940,2                                                                                                        
-67009,Longares,41.4047870,-1.1587910,2                                                                                                                
 67010,Cariñena,41.3355860,-1.2284220,2                                                                                                                
-67011,Encinacorba,41.2886500,-1.2785340,2                                                                                                             
-67013,Villarreal De Huerva,41.1964980,-1.2870960,2                                                                                                    
-67014,Villadoz,41.1654820,-1.2793390,2                                                                                                                
-67015,Badules,41.1395100,-1.2515720,2                                                                                                                 
-67016,Villahermosa,41.1084920,-1.2398030,2                                                                                                            
 67017,Ferreruela,41.0638700,-1.2393840,2                                                                                                              
-67018,Cuencabuena,41.0092930,-1.2546410,2                                                                                                             
-67019,Lechago,40.9576810,-1.2690870,2                                                                                                                 
-67020,Navarrete,40.9367210,-1.2617330,2                                                                                                               
 67021,Calamocha Nueva,40.9038640,-1.2998410,2                                                                                                         
 67100,Caminreal-Fuentes Claras,40.8511100,-1.3376500,2                                                                                                
 67101,Torrijo Del Campo,40.8260120,-1.3404980,2                                                                                                       
-67103,Villafranca Del Campo,40.6838270,-1.3579270,2                                                                                                   
 67105,Santa Eulalia Del Campo,40.5729170,-1.3129950,2                                                                                                 
 67107,Cella,40.4552660,-1.2443290,2                                                                                                                   
 67113,Monreal Del Campo,40.7823210,-1.3607920,2                                                                                                       
 67200,Teruel,40.3410290,-1.1102840,1                                                                                                                  
-67202,Puerto Escandón,40.2730920,-0.9850790,2                                                                                                         
 67203,Puebla De Valverde,40.2134240,-0.9446740,2                                                                                                      
 67205,Sarrión,40.1463390,-0.8236310,2                                                                                                                 
 67206,Mora De Rubielos,40.1231420,-0.7861450,2                                                                                                        
@@ -937,7 +925,6 @@ stop_id,stop_name,stop_lat,stop_lon,wheelchair_boarding
 71210,Flix,41.2295020,0.54007100,2                                                                                                                    
 71211,Ascó,41.1824790,0.56896400,2                                                                                                                    
 71300,Móra La Nova,41.1063740,0.65289300,2                                                                                                            
-71301,Els Guiamets,41.0934620,0.74717300,2                                                                                                            
 71302,Capçanes,41.1020570,0.78033000,2                                                                                                                
 71303,Marçà-Falset,41.1309450,0.81032800,2                                                                                                            
 71304,Pradell,41.1332400,0.85837100,2                                                                                                                 
@@ -1081,6 +1068,7 @@ stop_id,stop_name,stop_lat,stop_lon,wheelchair_boarding
 78804,Barcelona-Arc De Triomf,41.391864,2.180076,2                                                                                                    
 78805,Barcelona-Plaça De Catalunya,41.386726,2.166458,1                                                                                               
 78806,Barcelona La Sagrera Meridiana,41.422638,2.187262,2                                                                                             
+79002,Barcelona-Sagrera,41.4223890,2.19462300,2                                                                                                       
 79004,Barcelona-Sant Andreu,41.435807,2.193572,2                                                                                                      
 79005,Montcada I Reixac,41.483833,2.188193,2                                                                                                          
 79006,Mollet-Sant Fost,41.530069,2.215485,2                                                                                                           
