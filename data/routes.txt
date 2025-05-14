@@ -175,6 +175,8 @@ route_id,route_short_name,route_long_name,route_type,route_color,route_text_colo
 20T0092C6  ,C6  ,                                        -                                        ,2,65B0E1,FFFFFF                                    
 20T0093C5  ,C5  ,                                        -                                        ,2,BFD34D,FFFFFF                                    
 20T0094C5  ,C5  ,                                        -                                        ,2,BFD34D,FFFFFF                                    
+20T0095C6  ,C6  ,Gijon (Sanz Crespo)                     -La Pola Siero                           ,2,65B0E1,FFFFFF                                    
+20T0096C6  ,C6  ,La Pola Siero                           -Gijon (Sanz Crespo)                     ,2,65B0E1,FFFFFF                                    
 30T0001C1  ,C1  ,Lora del Rio                            -Lebrija                                 ,2,4C90C3,FFFFFF                                    
 30T0002C1  ,C1  ,Lebrija                                 -Lora del Rio                            ,2,4C90C3,FFFFFF                                    
 30T0003C2  ,C2  ,Santa Justa                             -Cartuja                                 ,2,067B34,FFFFFF                                    
