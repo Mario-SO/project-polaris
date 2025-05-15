@@ -589,13 +589,13 @@ stop_id,stop_name,stop_lat,stop_lon,wheelchair_boarding
 18000,Madrid - Atocha Cercanías,40.4061556,-3.6889579,1                                                                                               
 18001,Madrid-Recoletos,40.4234123,-3.6908535,2                                                                                                        
 18002,Madrid-Nuevos Ministerios,40.4466171,-3.6923408,1                                                                                               
-18003,M.alvaro-P,40.3956167,-3.6777094,2                                                                                                              
+18003,Mendez Alvaro,40.3956167,-3.6777094,2                                                                                                           
 18004,Delicias,40.4003715,-3.692763,2                                                                                                                 
 18005,Pirámides,40.4025917,-3.7113344,2                                                                                                               
 18101,Madrid-Sol,40.4168778,-3.7032107,2                                                                                                              
-19001,U.p.comill,40.554058,-3.683335,1                                                                                                                
-19002,Valdelasfu,40.5474433,-3.6543338,1                                                                                                              
-19003,Alcob.sseb,40.546566,-3.6351819,1                                                                                                               
+19001,Universidad P.comillas,40.554058,-3.683335,1                                                                                                    
+19002,Valdelasfuentes,40.5474433,-3.6543338,1                                                                                                         
+19003,Alcobendas-San Sebastian De Los Reyes,40.546566,-3.6351819,1                                                                                    
 21010,Ferrol,43.4880349,-8.2311430,1                                                                                                                  
 30000,Monfragüe-Plasencia,39.9374640,-6.1009100,2                                                                                                     
 30002,Plasencia,40.0222820,-6.0993970,2                                                                                                               
@@ -604,7 +604,7 @@ stop_id,stop_name,stop_lat,stop_lon,wheelchair_boarding
 35005,Illescas,40.1208800,-3.8422620,2                                                                                                                
 35009,Zarzaquemada,40.3406009,-3.7482111,2                                                                                                            
 35010,La Serna,40.2967500,-3.7926450,2                                                                                                                
-35011,P.polvoran,40.3125398,-3.7835135,2                                                                                                              
+35011,Parque Polvoranca,40.3125398,-3.7835135,2                                                                                                       
 35012,Humanes,40.2556903,-3.8286016,2                                                                                                                 
 35105,Torrijos,39.9790030,-4.2830370,2                                                                                                                
 35109,Montearagón,39.9609960,-4.6470930,2                                                                                                             
@@ -621,9 +621,9 @@ stop_id,stop_name,stop_lat,stop_lon,wheelchair_boarding
 35606,Mostoles,40.3284890,-3.8638111,2                                                                                                                
 35607,Mostoles El Soto,40.330971,-3.882441,2                                                                                                          
 35608,Laguna,40.3991775,-3.7442226,2                                                                                                                  
-35609,Embajador.,40.4051246,-3.7026286,2                                                                                                              
+35609,Embajadores,40.4051246,-3.7026286,2                                                                                                             
 35610,L. Retamas,40.3420458,-3.8424115,2                                                                                                              
-35702,Doce Octub,40.3790374,-3.6988513,2                                                                                                              
+35702,Doce De Octubre,40.3790374,-3.6988513,2                                                                                                         
 35703,Orcasitas,40.3666963,-3.7046002,2                                                                                                               
 35704,Puente Alcocer,40.3504002,-3.7051062,2                                                                                                          
 37001,Madrid-Villaverde Alto,40.3415512,-3.7115464,2                                                                                                  
@@ -661,8 +661,8 @@ stop_id,stop_name,stop_lat,stop_lon,wheelchair_boarding
 50703,La Rinconada,37.4800777,-5.9401246,2                                                                                                            
 50704,El Cañamo,37.488,-5.9312,2                                                                                                                      
 51003,Sevilla-Santa Justa,37.3921277,-5.9752694,1                                                                                                     
-51009,P.congreso,37.4037820,-5.9362556,1                                                                                                              
-51010,P.pio Palm,37.3708446,-5.9394732,1                                                                                                              
+51009,Palacio De Congresos,37.4037820,-5.9362556,1                                                                                                    
+51010,Padre Pio Palmete,37.3708446,-5.9394732,1                                                                                                       
 51050,Cartuja,37.4078985,-6.0098499,2                                                                                                                 
 51051,Est.olimp,37.4172225,-6.0074834,2                                                                                                               
 51100,Sevilla-San Bernardo,37.3775194,-5.9796,1                                                                                                       
@@ -1152,6 +1152,6 @@ stop_id,stop_name,stop_lat,stop_lon,wheelchair_boarding
 97100,Pitis,40.4954011,-3.7260638,2                                                                                                                   
 97200,Mirasierra-Paco De Lucía,40.499662,-3.709016,2                                                                                                  
 97201,Madrid-Ramón Y Cajal,40.4882980,-3.6946827,2                                                                                                    
-98003,Fte De La Mora,40.4847940,-3.6628860,2                                                                                                          
+98003,Fuente De La Mora,40.4847940,-3.6628860,2                                                                                                       
 98304,Valdebebas,40.482,-3.616292,2                                                                                                                   
 98305,Madrid-Aeropuerto T4,40.49174,-3.593473,2                                                                                                       
