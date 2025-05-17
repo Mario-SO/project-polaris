@@ -372,6 +372,8 @@ route_id,route_short_name,route_long_name,route_type,route_color,route_text_colo
 51T0116R14 ,R14 ,Cunit                                   -Lleida                                  ,2,805CC8,FFFFFF                                    
 51T0117R4  ,R4  ,Sabadell Sud                            -El Vendrell                             ,2,F7A30D,FFFFFF                                    
 51T0118R4  ,R4  ,El Vendrell                             -Sabadell Sud                            ,2,F7A30D,FFFFFF                                    
+51T0119R11 ,R11 ,Barcelona-Sant Andreu                   -Girona                                  ,2,88016A,FFFFFF                                    
+51T0120R11 ,R11 ,Girona                                  -Barcelona-Sant Andreu                   ,2,88016A,FFFFFF                                    
 60T0001C1  ,C1  ,Abando                                  -Santurtzi                               ,2,E32829,FFFFFF                                    
 60T0002C1  ,C1  ,Santurtzi                               -Abando                                  ,2,E32829,FFFFFF                                    
 60T0003C2  ,C2  ,Abando                                  -Muskiz                                  ,2,047E33,FFFFFF                                    
