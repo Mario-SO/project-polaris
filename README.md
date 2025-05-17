@@ -12,8 +12,8 @@ Currently, the official data is provided in GTFS format, which, while comprehens
     *   `GET /`: Welcome message.
     *   `GET /stations`: Lists all stations. Supports fuzzy search with `?q={query}`.
     *   `GET /stations/{stationId}`: Retrieves details for a specific station by its ID.
-    *   `GET /{departureStation}/{arrivalStation}`: Retrieves direct trip schedules. Defaults to today's date. Supports specific date querying with `?date={YYYY-MM-DD}`. Results are grouped to show unique departure/arrival time slots for the effective date.
-    *   `GET /{departureStation}/{arrivalStation}/next`: Retrieves the very next available train for the route based on the current time in Spain.
+    *   `GET /timetable/{departureStation}/{arrivalStation}`: Retrieves direct trip schedules. Defaults to today's date. Supports specific date querying with `?date={YYYY-MM-DD}`. Results are grouped to show unique departure/arrival time slots for the effective date.
+    *   `GET /timetable/{departureStation}/{arrivalStation}/next`: Retrieves the very next available train for the route based on the current time in Spain.
     *   `GET /stations/{stationId}/departures?date=YYYY-MM-DD&time=HH:MM`: Get all departures from a specific station. Defaults to current date/time if omitted.
     *   `GET /routes`: List all available routes (e.g., C1, C2, C3).
     *   `GET /routes/{routeId}`: Get details for a specific route, including its stops.
@@ -117,15 +117,15 @@ project-polaris/
         ```
     *   Get timetable between Valdemoro and Sol (defaults to today):
         ```bash
-        curl "http://localhost:3000/Valdemoro/Sol"
+        curl "http://localhost:3000/timetable/Valdemoro/Sol"
         ```
     *   Get timetable for a specific date:
         ```bash
-        curl "http://localhost:3000/Valdemoro/Sol?date=2024-08-15"
+        curl "http://localhost:3000/timetable/Valdemoro/Sol?date=2024-08-15"
         ```
     *   Get the next train from Valdemoro to Sol:
         ```bash
-        curl "http://localhost:3000/Valdemoro/Sol/next"
+        curl "http://localhost:3000/timetable/Valdemoro/Sol/next"
         ```
     Replace station names and IDs with your desired values. Partial, case-insensitive matching is supported for station names in path parameters.
 
@@ -193,17 +193,17 @@ Here's a breakdown of the available API endpoints:
 
 ## 💡 Important Notes on API Usage
 
-*   **Station Name Matching**: For endpoints using station names in path parameters (`/{departureStation}/{arrivalStation}` and `.../next`), the API performs a case-insensitive, partial match against station names in the database. It will use the *first* station found that matches the provided term. For more precise control, use station IDs where possible or ensure your search terms are specific enough. The `/stations?q=` endpoint can help identify full names and IDs.
+*   **Station Name Matching**: For endpoints using station names in path parameters (`/timetable/{departureStation}/{arrivalStation}` and `/timetable/.../next`), the API performs a case-insensitive, partial match against station names in the database. It will use the *first* station found that matches the provided term. For more precise control, use station IDs where possible or ensure your search terms are specific enough. The `/stations?q=` endpoint can help identify full names and IDs.
 *   **Date Handling**:
-    *   The `GET /{departureStation}/{arrivalStation}` endpoint defaults to the **current server's local date** if no `date` query parameter is supplied.
+    *   The `GET /timetable/{departureStation}/{arrivalStation}` endpoint defaults to the **current server's local date** if no `date` query parameter is supplied.
     *   When a `date` is provided (e.g., `?date=2024-08-20`), the API will query for that specific date.
     *   Invalid date formats for the `date` parameter will result in a 400 error.
-*   **"Next Train" Timezone**: The `GET /{departureStation}/{arrivalStation}/next` endpoint specifically uses the **current time in Spain (Europe/Madrid)** to determine the "next" train. This ensures relevance for users in Spain, regardless of the server's physical location or local time.
+*   **"Next Train" Timezone**: The `GET /timetable/{departureStation}/{arrivalStation}/next` endpoint specifically uses the **current time in Spain (Europe/Madrid)** to determine the "next" train. This ensures relevance for users in Spain, regardless of the server's physical location or local time.
 *   **Character Encoding in Station Names**:
     *   When querying station names that include special characters (e.g., tildes like in "Chamartín", or other accented characters), these characters **must be URL-encoded** in the request path or query parameters.
     *   For example, to search for "Chamartín":
-        *   **Incorrect (likely to fail or give wrong results):** `curl http://localhost:3000/Chamartín/Atocha`
-        *   **Correct (URL-encoded `í` as `%C3%AD`):** `curl http://localhost:3000/Chamart%C3%ADn/Atocha`
+        *   **Incorrect (likely to fail or give wrong results):** `curl http://localhost:3000/timetable/Chamartín/Atocha`
+        *   **Correct (URL-encoded `í` as `%C3%AD`):** `curl http://localhost:3000/timetable/Chamart%C3%ADn/Atocha`
     *   Similarly, if using the `/stations?q=` endpoint:
         *   **Incorrect:** `curl "http://localhost:3000/stations?q=Chamartín"`
         *   **Correct:** `curl "http://localhost:3000/stations?q=Chamart%C3%ADn"`

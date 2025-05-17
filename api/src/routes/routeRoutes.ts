@@ -3,7 +3,7 @@ import { getAllRoutes, getRouteById } from '../controllers/routeController';
 
 const routeRoutes = new Hono();
 
-routeRoutes.get('/routes', getAllRoutes);
-routeRoutes.get('/routes/:routeId', getRouteById);
+routeRoutes.get('/', getAllRoutes);
+routeRoutes.get('/:routeId', getRouteById);
 
-export default routeRoutes; 
+export default routeRoutes;

@@ -21,9 +21,9 @@ app.get('/', (c) => {
 })
 
 // Mount the routers
-app.route('/', stationRoutes)
-app.route('/', timetableRoutes)
-app.route('/', routeRoutes)
+app.route('/stations', stationRoutes)
+app.route('/timetable', timetableRoutes)
+app.route('/routes', routeRoutes)
 
 export default {
     port: 3000,
