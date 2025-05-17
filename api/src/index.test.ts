@@ -81,7 +81,7 @@ describe('Renfe Timetables API Tests', () => {
   it('should return timetable for /:departureStation/:arrivalStation (defaulting to today)', async () => {
     const depStation = 'MADRID'; 
     const arrStation = 'BARCELONA';
-    const req = new Request(`http://localhost/${depStation}/${arrStation}`);
+    const req = new Request(`http://localhost/timetable/${depStation}/${arrStation}`);
     const res = await app.fetch(req);
     
     expect([200, 404]).toContain(res.status);
@@ -109,7 +109,7 @@ describe('Renfe Timetables API Tests', () => {
     const depStation = 'MADRID';
     const arrStation = 'BARCELONA';
     const date = '2024-07-30'; // Use a date likely to have service, adjust if needed
-    const req = new Request(`http://localhost/${depStation}/${arrStation}?date=${date}`)
+    const req = new Request(`http://localhost/timetable/${depStation}/${arrStation}?date=${date}`)
     const res = await app.fetch(req)
     // console.log(`Test /${depStation}/${arrStation}?date=${date} response:`, res.status, await res.clone().text());
     expect([200, 404]).toContain(res.status)
@@ -123,7 +123,7 @@ describe('Renfe Timetables API Tests', () => {
   })
 
   it('should return 400 for /:departureStation/:arrivalStation with an invalid date format', async () => {
-    const req = new Request('http://localhost/MADRID/BARCELONA?date=invalid-date-format')
+    const req = new Request('http://localhost/timetable/MADRID/BARCELONA?date=invalid-date-format')
     const res = await app.fetch(req)
     expect(res.status).toBe(400)
     const data = await res.json() as any;
@@ -132,7 +132,7 @@ describe('Renfe Timetables API Tests', () => {
   })
 
   it('should return 404 if departure station is not found', async () => {
-    const req = new Request('http://localhost/NonExistentStation123/BARCELONA')
+    const req = new Request('http://localhost/timetable/NonExistentStation123/BARCELONA')
     const res = await app.fetch(req)
     expect(res.status).toBe(404)
     const data = await res.json() as any;
@@ -141,7 +141,7 @@ describe('Renfe Timetables API Tests', () => {
   })
 
   it('should return 404 if arrival station is not found', async () => {
-    const req = new Request('http://localhost/MADRID/NonExistentStation456')
+    const req = new Request('http://localhost/timetable/MADRID/NonExistentStation456')
     const res = await app.fetch(req)
     expect(res.status).toBe(404)
     const data = await res.json() as any;
@@ -154,7 +154,7 @@ describe('Renfe Timetables API Tests', () => {
     const depStation = 'MADRID'; 
     const arrStation = 'BARCELONA';
     const date = '1900-01-01'; 
-    const req = new Request(`http://localhost/${depStation}/${arrStation}?date=${date}`);
+    const req = new Request(`http://localhost/timetable/${depStation}/${arrStation}?date=${date}`);
     const res = await app.fetch(req);
     expect(res.status).toBe(404);
     const data = await res.json() as any; 
@@ -167,7 +167,7 @@ describe('Renfe Timetables API Tests', () => {
   it('should return the next train for /:departureStation/:arrivalStation/next', async () => {
     const depStation = 'MADRID'; // Use stations likely to have frequent service
     const arrStation = 'BARCELONA';
-    const req = new Request(`http://localhost/${depStation}/${arrStation}/next`);
+    const req = new Request(`http://localhost/timetable/${depStation}/${arrStation}/next`);
     const res = await app.fetch(req);
 
     expect([200, 404]).toContain(res.status);
