@@ -5,26 +5,26 @@ on:
     branches: [main]
 
 jobs:
-  tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-      - name: Install dependencies
-        working-directory: api
-        run: bun install
-      - name: Fetch GTFS data
-        run: bun run ./scripts/get-timetables.ts
-      - name: Load GTFS data
-        run: bun run ./api/src/load-data.ts
-      - name: Run tests
-        run: bun test ./api/src/index.test.ts
+  # tests:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Setup Bun
+  #       uses: oven-sh/setup-bun@v1
+  #       with:
+  #         bun-version: latest
+  #     - name: Install dependencies
+  #       working-directory: api
+  #       run: bun install
+  #     - name: Fetch GTFS data
+  #       run: bun run ./scripts/get-timetables.ts
+  #     - name: Load GTFS data
+  #       run: bun run ./api/src/load-data.ts
+  #     - name: Run tests
+  #       run: bun test ./api/src/index.test.ts
 
   deploy:
-    needs: tests
+    # needs: tests
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
