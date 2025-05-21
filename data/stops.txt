@@ -157,6 +157,8 @@ stop_id,stop_name,stop_lat,stop_lon,wheelchair_boarding
 05420,Curuxona,43.3398152,-5.6304762,2                                                                                                                
 05421,Tiuya/Tuilla,43.3281506,-5.6430775,2                                                                                                            
 05425,La Felguera-Vega,43.3104908,-5.6856598,2                                                                                                        
+05426,La Felguera-Nuevo Langreo,43305459,-5688896,2                                                                                                   
+05427,Sama-Los Llerones,43296706,-5680359,2                                                                                                           
 05429,Sama-Los Llerones,43.2987975,-5.6833132,2                                                                                                       
 05431,Ciaño-Escobio,43.2907242,-5.6678998,2                                                                                                           
 05432,San Vicente,43.2891417,-5.6529333,2                                                                                                             
@@ -745,7 +747,7 @@ stop_id,stop_name,stop_lat,stop_lon,wheelchair_boarding
 61200,Murcia,37.9748243,-1.1315080,1                                                                                                                  
 62001,Beniel,38.0448608,-0.9994759,2                                                                                                                  
 62002,Orihuela-Miguel Hernández,38.0779321,-0.9446060,2                                                                                               
-62003,Callosa De Segura,38.1227041,-0.8744504,2                                                                                                       
+62003,Callosa De Segura,38.1227686,-0.8745747,2                                                                                                       
 62100,Albatera-Catral,38.1670209,-0.8380854,2                                                                                                         
 62101,Crevillent,38.2245622,-0.7815283,2                                                                                                              
 62102,Elche/Elx Carrús,38.2689783,-0.7063992,2                                                                                                        
