@@ -413,6 +413,7 @@ stop_id,stop_name,stop_lat,stop_lon,wheelchair_boarding
 11009,Villaquirán,42.2157170,-3.9993960,2                                                                                                             
 11014,Burgos Rosa Manzano,42.3711970,-3.6663080,1                                                                                                     
 11109,Briviesca,42.5427650,-3.3192870,2                                                                                                               
+11111,Pancorbo,42.6304860,-3.1123070,2                                                                                                                
 11200,Miranda De Ebro,42.6910240,-2.9403660,1                                                                                                         
 11203,Manzanos,42.7428990,-2.8675010,2                                                                                                                
 11204,La Puebla De Arganzón,42.7652450,-2.8303850,2                                                                                                   
