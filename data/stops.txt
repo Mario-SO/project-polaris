@@ -157,8 +157,8 @@ stop_id,stop_name,stop_lat,stop_lon,wheelchair_boarding
 05420,Curuxona,43.3398152,-5.6304762,2                                                                                                                
 05421,Tiuya/Tuilla,43.3281506,-5.6430775,2                                                                                                            
 05425,La Felguera-Vega,43.3104908,-5.6856598,2                                                                                                        
-05426,La Felguera-Nuevo Langreo,43305459,-5688896,2                                                                                                   
-05427,Sama-Los Llerones,43296706,-5680359,2                                                                                                           
+05426,La Felguera-Nuevo Langreo,43.305459,-5.688896,2                                                                                                 
+05427,Sama-Los Llerones,43.296706,-5.680359,2                                                                                                         
 05429,Sama-Los Llerones,43.2987975,-5.6833132,2                                                                                                       
 05431,Ciaño-Escobio,43.2907242,-5.6678998,2                                                                                                           
 05432,San Vicente,43.2891417,-5.6529333,2                                                                                                             
@@ -754,6 +754,7 @@ stop_id,stop_name,stop_lat,stop_lon,wheelchair_boarding
 62102,Elche/Elx Carrús,38.2689783,-0.7063992,2                                                                                                        
 62103,Elche Parque/Elx Parc,38.2717809,-0.6952193,2                                                                                                   
 62104,Torrellano,38.2896365,-0.5824572,2                                                                                                              
+62108,Elx-Mercancias,38.2785340,-0.6536870,2                                                                                                          
 62109,Sant Gabriel,38.3290647,-0.5086866,2                                                                                                            
 64003,Moixent/Mogente,38.8777975,-0.7536507,2                                                                                                         
 64004,Vallada (apt-Cgd),38.9089907,-0.6902385,2                                                                                                       
